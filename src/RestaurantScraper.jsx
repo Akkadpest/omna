@@ -4,9 +4,10 @@ import "./RestaurantScraper.css";
 const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_KEY;
 
 const PROXIES = [
-  (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-  (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, json: true },
+  { url: (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`, json: false },
+  { url: (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`, json: false },
+  { url: (u) => `https://thingproxy.freeboard.io/fetch/${u}`, json: false },
 ];
 
 function stripHtml(html) {
@@ -27,13 +28,19 @@ function stripHtml(html) {
 
 async function fetchWithFallback(url, addLog) {
   for (let i = 0; i < PROXIES.length; i++) {
+    const proxy = PROXIES[i];
     try {
-      const proxyUrl = PROXIES[i](url);
+      const proxyUrl = proxy.url(url);
       addLog(`Trying proxy ${i + 1}/${PROXIES.length}…`);
-      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
+      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(15000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const html = data.contents || data.body || (typeof data === "string" ? data : "");
+      let html;
+      if (proxy.json) {
+        const data = await res.json();
+        html = data.contents || data.body || (typeof data === "string" ? data : "");
+      } else {
+        html = await res.text();
+      }
       const text = stripHtml(html);
       if (text.length > 200) return text;
       throw new Error("Too little content returned");
