@@ -182,12 +182,13 @@ export default function OmnaScrapper() {
     if (!urlInput.trim()) return addLog("Enter a URL first.", "error");
     if (!ANTHROPIC_KEY) return addLog("VITE_ANTHROPIC_KEY missing in .env.local", "error");
     setLoading(true);
-    addLog(`Fetching: ${urlInput}`);
+    const normalizedUrl = urlInput.trim().match(/^https?:\/\//) ? urlInput.trim() : `https://${urlInput.trim()}`;
+    addLog(`Fetching: ${normalizedUrl}`);
     try {
-      const text = await fetchWithFallback(urlInput, addLog);
+      const text = await fetchWithFallback(normalizedUrl, addLog);
       addLog(`Fetched ${text.length.toLocaleString()} chars. Sending to Claude AI…`);
       const items = await callClaude(text);
-      const added = mergeResults(items, urlInput);
+      const added = mergeResults(items, normalizedUrl);
       addLog(`✓ Extracted ${items.length} record(s) — ${added} new added.`, "success");
     } catch (e) {
       addLog(e.message, "error");
