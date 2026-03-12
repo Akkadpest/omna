@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import "./RestaurantScraper.css";
 
-const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_KEY || "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";
+const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_KEY;
 
 const PROXIES = [
   { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, json: true },
