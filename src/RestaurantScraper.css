@@ -1,0 +1,426 @@
+/* ── OMNA Scrapper — Green & White Theme ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #f4f7f4;
+  --surface:    #ffffff;
+  --surface2:   #f0f6f0;
+  --surface3:   #e6f2e6;
+  --border:     #d4e8d4;
+  --border2:    #b8d8b8;
+  --green:      #2e9e4f;
+  --green-dark: #1e7a3a;
+  --green-mid:  #3ab85f;
+  --green-dim:  #e8f7ed;
+  --green-glow: rgba(46,158,79,0.15);
+  --accent:     #22c55e;
+  --red:        #e53e3e;
+  --red-dim:    #fff5f5;
+  --gold:       #d97706;
+  --gold-dim:   #fffbeb;
+  --text:       #1a2e1a;
+  --text2:      #3a5c3a;
+  --muted:      #6b8f6b;
+  --muted2:     #a8c4a8;
+  --white:      #ffffff;
+  --font:       'Inter', 'Segoe UI', system-ui, sans-serif;
+  --mono:       'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --r:          10px;
+  --r-sm:       7px;
+  --t:          all 0.18s ease;
+  --shadow:     0 1px 4px rgba(46,158,79,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 24px rgba(46,158,79,0.12), 0 8px 32px rgba(0,0,0,0.08);
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App ─────────────────────────────────────────────────────────────────── */
+.omna-app { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ── Navbar ──────────────────────────────────────────────────────────────── */
+.omna-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 62px;
+  background: var(--green-dark);
+  border-bottom: none;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.omna-logo { display: flex; align-items: center; gap: 12px; }
+
+.omna-logo-mark {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: #fff; letter-spacing: -0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.omna-logo-text { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 2px; }
+.omna-logo-sub  { font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; margin-top: 1px; }
+
+.omna-nav-right { display: flex; align-items: center; gap: 12px; }
+
+.omna-nav-badge {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11.5px; color: rgba(255,255,255,0.85);
+  font-family: var(--mono);
+}
+
+.omna-nav-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80; box-shadow: 0 0 6px #4ade80;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
+
+/* ── Main ────────────────────────────────────────────────────────────────── */
+.omna-main { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Stats ───────────────────────────────────────────────────────────────── */
+.omna-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.omna-stat-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: var(--t); box-shadow: var(--shadow);
+}
+.omna-stat-card:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.omna-stat-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.omna-stat-icon.blue   { background: #eff8ff; }
+.omna-stat-icon.green  { background: var(--green-dim); }
+.omna-stat-icon.purple { background: #f5f3ff; }
+.omna-stat-icon.gold   { background: var(--gold-dim); }
+
+.omna-stat-num   { font-size: 28px; font-weight: 800; color: var(--green-dark); line-height: 1; font-family: var(--mono); }
+.omna-stat-label { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.omna-panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); display: flex; flex-direction: column;
+  overflow: hidden; box-shadow: var(--shadow);
+}
+
+.omna-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  background: var(--surface2); flex-shrink: 0; flex-wrap: wrap; gap: 10px;
+}
+
+.omna-panel-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; color: var(--green-dark);
+}
+.omna-panel-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.omna-panel-body {
+  padding: 20px; flex: 1;
+  display: flex; flex-direction: column; gap: 14px;
+  overflow: hidden;
+}
+
+/* ── Input panel ─────────────────────────────────────────────────────────── */
+.omna-input-body { gap: 12px; }
+.omna-paste-row  { display: flex; flex-direction: column; gap: 10px; }
+
+.omna-paste-hint {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 12px; color: var(--text2);
+  background: var(--green-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: 10px 14px;
+}
+
+.omna-hint-step {
+  background: var(--green); color: #fff;
+  border-radius: 5px; padding: 1px 8px;
+  font-size: 11px; font-weight: 700;
+}
+
+kbd {
+  background: var(--surface3); border: 1px solid var(--border2);
+  border-radius: 4px; padding: 1px 6px;
+  font-family: var(--mono); font-size: 11px; color: var(--text2);
+}
+
+.omna-char-count { font-size: 11.5px; color: var(--muted); font-family: var(--mono); }
+.omna-action-row { display: flex; align-items: center; justify-content: space-between; }
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.omna-tabs {
+  display: flex; background: var(--surface3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: 3px; gap: 3px; align-self: flex-start;
+}
+
+.omna-tab {
+  padding: 7px 18px; background: transparent; border: none; border-radius: 5px;
+  color: var(--muted); font-family: var(--font); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: var(--t);
+}
+.omna-tab:hover:not(.active) { color: var(--green-dark); background: rgba(46,158,79,0.08); }
+.omna-tab.active {
+  background: var(--green); color: #fff; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(46,158,79,0.3);
+}
+
+/* ── Inputs ──────────────────────────────────────────────────────────────── */
+.omna-textarea {
+  width: 100%; min-height: 120px;
+  background: var(--surface);
+  border: 1.5px solid var(--border); border-radius: var(--r-sm);
+  color: var(--text); font-family: var(--mono); font-size: 12.5px;
+  padding: 12px 14px; resize: vertical; outline: none;
+  transition: border-color .15s; line-height: 1.65;
+}
+.omna-textarea-wide { min-height: 140px; }
+.omna-textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+.omna-textarea::placeholder { color: var(--muted2); }
+
+.omna-input-wrap { display: flex; gap: 10px; }
+
+.omna-input {
+  flex: 1; background: var(--surface);
+  border: 1.5px solid var(--border); border-radius: var(--r-sm);
+  color: var(--text); font-family: var(--mono); font-size: 13px;
+  padding: 10px 14px; outline: none; transition: border-color .15s;
+}
+.omna-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+.omna-input::placeholder { color: var(--muted2); }
+
+.omna-search {
+  background: var(--surface);
+  border: 1.5px solid var(--border); border-radius: var(--r-sm);
+  color: var(--text); font-family: var(--font); font-size: 13px;
+  padding: 7px 12px; outline: none; width: 200px; transition: border-color .15s;
+}
+.omna-search:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+.omna-search::placeholder { color: var(--muted2); }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.omna-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: var(--r-sm);
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: var(--t); white-space: nowrap;
+}
+.omna-btn:disabled { opacity: .45; cursor: not-allowed; }
+.omna-btn-sm { padding: 6px 13px; font-size: 12px; }
+
+.omna-btn-primary { background: var(--green); color: #fff; }
+.omna-btn-primary:hover:not(:disabled) {
+  background: var(--green-dark);
+  box-shadow: 0 4px 14px rgba(46,158,79,0.35);
+  transform: translateY(-1px);
+}
+
+.omna-btn-success {
+  background: var(--green-dim); color: var(--green-dark);
+  border: 1.5px solid var(--border2);
+}
+.omna-btn-success:hover:not(:disabled) {
+  background: #d1f0da; border-color: var(--green);
+  transform: translateY(-1px);
+}
+
+.omna-btn-ghost-red {
+  background: transparent; color: var(--red);
+  border: 1.5px solid rgba(229,62,62,0.3);
+}
+.omna-btn-ghost-red:hover:not(:disabled) {
+  background: var(--red-dim); border-color: var(--red);
+}
+
+/* ── Log ─────────────────────────────────────────────────────────────────── */
+.omna-log-wrap { display: flex; flex-direction: column; gap: 6px; }
+.omna-log-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+
+.omna-log {
+  background: #f8fcf8;
+  border: 1.5px solid var(--border); border-radius: var(--r-sm);
+  padding: 10px 12px; max-height: 130px; overflow-y: auto;
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.9;
+}
+.omna-log-empty { color: var(--muted2); font-style: italic; }
+.omna-log-line  { display: flex; gap: 8px; }
+.omna-log-ts    { color: var(--muted2); flex-shrink: 0; }
+.omna-log-msg.info    { color: var(--text2); }
+.omna-log-msg.success { color: var(--green-dark); font-weight: 600; }
+.omna-log-msg.error   { color: var(--red); }
+.omna-log-msg.warn    { color: var(--gold); }
+
+/* ── View toggle ─────────────────────────────────────────────────────────── */
+.omna-view-toggle {
+  display: flex; background: var(--surface3);
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  padding: 2px; gap: 2px;
+}
+.omna-view-btn {
+  padding: 5px 11px; background: transparent; border: none; border-radius: 5px;
+  color: var(--muted); font-size: 12px; cursor: pointer; transition: var(--t);
+  font-family: var(--font);
+}
+.omna-view-btn:hover:not(.active) { color: var(--green-dark); }
+.omna-view-btn.active { background: var(--green); color: #fff; font-weight: 600; }
+
+/* ── Results body ────────────────────────────────────────────────────────── */
+.omna-results-body { flex: 1; overflow: hidden; padding: 0; }
+
+.omna-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; padding: 60px 20px; text-align: center;
+}
+.omna-empty-icon { font-size: 40px; opacity: .25; }
+.omna-empty-sub  { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+
+/* ── Table ───────────────────────────────────────────────────────────────── */
+.omna-table-wrap { overflow: auto; max-height: 520px; }
+.omna-table-wrap::-webkit-scrollbar { width: 5px; height: 5px; }
+.omna-table-wrap::-webkit-scrollbar-track { background: transparent; }
+.omna-table-wrap::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.omna-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.omna-table thead { position: sticky; top: 0; z-index: 10; }
+
+.omna-table th {
+  background: var(--surface2); color: var(--muted);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 11px 14px; text-align: left; border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.omna-table td {
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+  vertical-align: middle; color: var(--text2);
+}
+
+.omna-tr { transition: background .1s; }
+.omna-tr:hover td { background: var(--green-dim); }
+.omna-tr:last-child td { border-bottom: none; }
+
+.omna-td-num  { color: var(--muted2); font-size: 11px; font-family: var(--mono); text-align: center; }
+.omna-td-name { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text); white-space: nowrap; }
+
+.omna-td-avatar {
+  width: 30px; height: 30px; border-radius: 7px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green-dim), #c6edce);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: var(--green-dark);
+}
+
+.omna-td-email { color: var(--green-dark); font-family: var(--mono); font-size: 12px; font-weight: 600; }
+.omna-td-link  { color: var(--green); text-decoration: none; font-size: 12px; font-weight: 600; }
+.omna-td-link:hover { text-decoration: underline; color: var(--green-dark); }
+.omna-td-empty { color: var(--muted2); }
+
+.omna-chip {
+  display: inline-flex; align-items: center;
+  background: var(--surface3); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2px 9px; font-size: 11px;
+  color: var(--text2); white-space: nowrap;
+}
+
+.omna-rating { color: var(--gold); font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+.omna-del-btn {
+  background: transparent; border: none; color: var(--muted2);
+  cursor: pointer; font-size: 13px; padding: 3px 6px;
+  border-radius: 4px; transition: var(--t);
+}
+.omna-del-btn:hover { color: var(--red); background: var(--red-dim); }
+
+/* ── Cards grid ──────────────────────────────────────────────────────────── */
+.omna-cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px; overflow-y: auto; max-height: 520px; padding: 20px;
+}
+.omna-cards-grid::-webkit-scrollbar { width: 5px; }
+.omna-cards-grid::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.omna-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 16px;
+  transition: var(--t); display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--shadow);
+}
+.omna-card:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.omna-card-head { display: flex; align-items: flex-start; gap: 10px; }
+
+.omna-card-avatar {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green-dim), #c6edce);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: var(--green-dark);
+  border: 1px solid var(--border);
+}
+
+.omna-card-title-wrap { flex: 1; min-width: 0; }
+.omna-card-name  { font-size: 14px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.omna-card-meta  { display: flex; align-items: center; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
+
+.omna-card-fields { display: flex; flex-direction: column; gap: 6px; }
+.omna-card-field  { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+.omna-fi          { width: 16px; text-align: center; flex-shrink: 0; }
+.omna-fv          { color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
+.omna-fv-email    { color: var(--green-dark); font-family: var(--mono); font-weight: 600; }
+.omna-fv-link     { color: var(--green); text-decoration: none; font-weight: 600; }
+.omna-fv-link:hover { text-decoration: underline; }
+
+/* ── Spinner ─────────────────────────────────────────────────────────────── */
+.omna-spinner {
+  width: 13px; height: 13px;
+  border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+  border-radius: 50%; animation: spin .7s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Scrollbars ──────────────────────────────────────────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .omna-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .omna-nav   { padding: 0 16px; }
+  .omna-main  { padding: 14px 16px; }
+  .omna-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .omna-search { width: 140px; }
+  .omna-logo-sub { display: none; }
+}
+@media (max-width: 500px) {
+  .omna-stats { grid-template-columns: 1fr 1fr; }
+  .omna-nav-badge { display: none; }
+  .omna-input-wrap { flex-direction: column; }
+  .omna-panel-header { flex-direction: column; align-items: flex-start; }
+}
